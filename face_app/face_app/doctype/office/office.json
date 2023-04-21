@@ -1,0 +1,77 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-03-30 10:06:59.741855",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "office",
+  "company",
+  "company_abbr",
+  "qrcode",
+  "qrcode_image"
+ ],
+ "fields": [
+  {
+   "fieldname": "office",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Office",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "qrcode",
+   "fieldtype": "Attach Image",
+   "label": "Qrcode",
+   "read_only": 1
+  },
+  {
+   "fieldname": "qrcode_image",
+   "fieldtype": "Image",
+   "label": "Qrcode Image",
+   "options": "qrcode",
+   "read_only": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "company.abbr",
+   "fieldname": "company_abbr",
+   "fieldtype": "Data",
+   "label": "Company Abbr",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-03-30 12:04:51.287177",
+ "modified_by": "Administrator",
+ "module": "Attendance App",
+ "name": "Office",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
