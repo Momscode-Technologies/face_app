@@ -190,3 +190,22 @@ app_license = "MIT"
 # auth_hooks = [
 #	"face_app.auth.validate"
 # ]
+
+fixtures =[
+	{
+		"dt":"Custom Field",
+		"filters":[
+			[
+				"name",
+				"in",[
+					"Employee Checkin-location",
+					"Employee Checkin-latitude",
+					"Employee Checkin-longitude",
+					"Employee Checkin-office_id",
+					"Employee Checkin-employee_attendance_actual_image",
+					"Employee Checkin-employee_attendance_image",
+				]
+			]
+		]
+	}
+]
