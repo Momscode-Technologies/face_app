@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include face_app *.css
+recursive-include face_app *.csv
+recursive-include face_app *.html
+recursive-include face_app *.ico
+recursive-include face_app *.js
+recursive-include face_app *.json
+recursive-include face_app *.md
+recursive-include face_app *.png
+recursive-include face_app *.py
+recursive-include face_app *.svg
+recursive-include face_app *.txt
+recursive-exclude face_app *.pyc
