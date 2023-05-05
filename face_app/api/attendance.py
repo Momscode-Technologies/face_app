@@ -32,14 +32,14 @@ def request_attendance():
         employee = frappe.db.sql(""" SELECT * FROM `tabEmployee` WHERE name=%s """, data.get("employee_id"),as_dict=1)
 
         if len(employee) == 0:
-            frappe.log_error(str(data), "Employee does not exist")
+            # frappe.log_error(str(data), "Employee does not exist")
 
             return {
                 "success": False,
                 "message": "Employee does not exist",
             }
         if len(employee) > 0 and not employee[0].image:
-            frappe.log_error(str(data), "Please Upload Image for employee in employee master. Please contact ERPNext Administrator")
+            # frappe.log_error(str(data), "Please Upload Image for employee in employee master. Please contact ERPNext Administrator")
 
             return {
                 "success": False,
@@ -65,7 +65,7 @@ def request_attendance():
                }
 
         if not data.get("employee_face_image"):
-            frappe.log_error(str(data), "No valid image")
+            # frappe.log_error(str(data), "No valid image")
 
             return {
                 "success": False,
