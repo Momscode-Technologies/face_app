@@ -292,7 +292,7 @@ def check_image(unknown_image=None, uploaded_image=None):
 
     # my_face_encoding now contains a universal 'encoding' of my facial features that can be compared to any other picture of a face!
 
-    unknown_picture = face_recognition.load_image_file(frappe.get_site_path() + uploaded_image)
+    unknown_picture = face_recognition.load_image_file(frappe.get_site_path() + "/public/" + uploaded_image)
     unknown_face_encoding = face_recognition.face_encodings(unknown_picture)[0]
 
     # Now we can see the two face encodings are of the same person with `compare_faces`!
