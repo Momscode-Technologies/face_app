@@ -9,6 +9,7 @@ app_license = "MIT"
 
 # Includes in <head>
 # ------------------
+after_migrate = ["face_app.api.after_migrate.execute"]
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/face_app/css/face_app.css"
