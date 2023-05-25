@@ -203,7 +203,7 @@ fixtures =[
 					"Employee Checkin-latitude",
 					"Employee Checkin-longitude",
 					"Employee Checkin-office_id",
-					"Employee Checkin-employee_attendance_actual_image",
+					# "Employee Checkin-employee_attendance_actual_image",
 					"Employee Checkin-employee_attendance_image",
 				]
 			]

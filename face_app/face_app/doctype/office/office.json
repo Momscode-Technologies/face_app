@@ -11,6 +11,7 @@
   "company",
   "company_abbr",
   "qrcode",
+  "column_break_5",
   "qrcode_image"
  ],
  "fields": [
@@ -25,6 +26,7 @@
   {
    "fieldname": "qrcode",
    "fieldtype": "Attach Image",
+   "hidden": 1,
    "label": "Qrcode",
    "read_only": 1
   },
@@ -48,11 +50,15 @@
    "fieldtype": "Data",
    "label": "Company Abbr",
    "read_only": 1
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-03-30 12:04:51.287177",
+ "modified": "2023-05-25 09:35:00.259758",
  "modified_by": "Administrator",
  "module": "Face App",
  "name": "Office",
