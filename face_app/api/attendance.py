@@ -17,11 +17,10 @@ sample_data = {
 }
 @frappe.whitelist()
 def request_attendance():
-    frappe.log_error("Request Attendance", "Request Attendance")
     try:
         # data = sample_data
         data = json.loads(frappe.request.data)
-        # frappe.log_error(str(data), "Request Attendance")
+        frappe.log_error(message=str(data), title="Request Attendance")
         # data = sample_data
         if not data.get("employee_id"):
             return {
