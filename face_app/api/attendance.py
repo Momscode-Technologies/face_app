@@ -130,7 +130,7 @@ def get_attendance_status():
     if not attendance_date:
         attendance_date = frappe.utils.now_datetime().date()
 
-    employee_checkin = frappe.db.sql(""" SELECT employee, employee_name, time FROM `tabEmployee Checkin` WHERE time BETWEEN %s and %s ORDER BY time DESC""", (str(attendance_date) + " 00:00:00", str(attendance_date) + " 23:59:59"), as_dict=1)
+    employee_checkin = frappe.db.sql(""" SELECT employee, employee_name, time FROM `tabEmployee Checkin` WHERE employee=%s and time BETWEEN %s and %s ORDER BY time DESC""", (data.get("employee_id"),str(attendance_date) + " 00:00:00", str(attendance_date) + " 23:59:59"), as_dict=1)
 
     return {
         "success": True,
