@@ -18,6 +18,17 @@ frappe.query_reports["Employee Checkin Register"] = {
 			"reqd":1,
 
 		},
+		{
+			"fieldname": "location",
+			"fieldtype": "Data",
+			"label": "Location"
+		},
+		{
+			"fieldname": "employee",
+			"fieldtype": "Link",
+			"label": "Employee",
+			"options": "Employee",
+		},
 	],
 		onload: function(report) {
             // dropdown for links to other financial statements
