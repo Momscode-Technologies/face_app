@@ -45,7 +45,7 @@ def get_columns():
 			"width": 100
 		},
 		{
-			"fieldname": "shift_type",
+			"fieldname": "shift",
 			"fieldtype": "Link",
 			"label": "Shift",
 			"options": "Shift Type",
@@ -77,11 +77,6 @@ def get_columns():
 			"width": 200
 		},
 		{
-			"fieldname": "normal_time",
-			"fieldtype": "Float",
-			"label": "Normal Time",
-			"width": 130
-		},{
 			"fieldname": "overtime",
 			"fieldtype": "Float",
 			"label": "Overtime",
@@ -96,6 +91,9 @@ def get_conditions(filters):
 		conditions += " and employee='{0}'".format(filters.get("employee"))
 	if filters.get("location"):
 		conditions += " and location like '{0}%'".format(filters.get("location"))
+
+	if filters.get("office"):
+		conditions += " and office_id='{0}'".format(filters.get("office"))
 	return conditions
 def execute(filters=None):
 	columns, data = get_columns(), []
@@ -109,9 +107,10 @@ def execute(filters=None):
 	current_employee = ""
 	current_date = ""
 	prev_object = {}
+	standard_working_hours = frappe.db.get_single_value("HR Settings", "standard_working_hours")
 	for x in data:
 		date_ = frappe.utils.getdate(x.time)
-		x['standard_working_hour'] = frappe.db.get_single_value("HR Settings", "standard_working_hours")
+		x['standard_working_hour'] = standard_working_hours
 		x['attendance_date'] = date_
 		if not current_employee:
 			x['in_time'] = str(frappe.utils.get_datetime(x.time).time())
@@ -125,14 +124,14 @@ def execute(filters=None):
 			prev_object = x
 			continue
 
-
 		# f_data.append(prev_object)
 		f_data[-1]["out_time"] = str(frappe.utils.get_datetime(prev_object['time']).time())
+		# difference_normal_time = frappe.utils.time_diff_in_hours(str(f_data[-1]["attendance_date"])+ " " + str(f_data[-1]["out_time"]),str(f_data[-1]["attendance_date"]) + " " + str(f_data[-1]["in_time"]))
 		difference_normal_time = frappe.utils.time_diff_in_hours(str(f_data[-1]["attendance_date"])+ " " + str(f_data[-1]["out_time"]),str(f_data[-1]["attendance_date"]) + " " + str(f_data[-1]["in_time"]))
 
-		f_data[-1]['normal_time'] = difference_normal_time if difference_normal_time <= 8 else 8
+		# f_data[-1]['normal_time'] = difference_normal_time if difference_normal_time <= 8 else 8
 
-		f_data[-1]['overtime'] = difference_normal_time - 8 if difference_normal_time > 8 else 0
+		f_data[-1]['overtime'] = difference_normal_time - x['standard_working_hour'] if (difference_normal_time - x['standard_working_hour']) > 0 else 0
 
 		x['in_time'] = str(frappe.utils.get_datetime(x.time).time())
 		f_data.append(x)
@@ -142,6 +141,11 @@ def execute(filters=None):
 		current_date = frappe.utils.getdate(x.time)
 	if prev_object:
 		f_data[-1]["out_time"] = str(frappe.utils.get_datetime(prev_object['time']).time())
+		# difference_normal_time = frappe.utils.time_diff_in_hours(str(f_data[-1]["attendance_date"])+ " " + str(f_data[-1]["out_time"]),str(f_data[-1]["attendance_date"]) + " " + str(f_data[-1]["in_time"]))
+
+        # f_data[-1]['overtime'] = difference_normal_time - f_data[-1]['standard_working_hour'] if difference_normal_time - f_data[-1]['standard_working_hour'] > 8 else 0
+
 	# prev_object['in_time'] = frappe.utils.get_datetime(prev_object['time']).time()
 	# f_data.append(prev_object)
+	print(f_data)
 	return columns, f_data

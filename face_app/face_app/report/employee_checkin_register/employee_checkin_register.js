@@ -29,19 +29,26 @@ frappe.query_reports["Employee Checkin Register"] = {
 			"label": "Employee",
 			"options": "Employee",
 		},
+
+		{
+			"fieldname": "office",
+			"fieldtype": "Link",
+			"label": "Office",
+			"options": "Office",
+		},
 	],
 		onload: function(report) {
             // dropdown for links to other financial statements
 
 
-            let fiscal_year = frappe.defaults.get_user_default("fiscal_year")
-            console.log("FISCAL YEAR")
-            frappe.model.with_doc("Fiscal Year", fiscal_year, function (r) {
-                var fy = frappe.model.get_doc("Fiscal Year", fiscal_year);
-                frappe.query_report.set_filter_value({
-                    from_date: fy.year_start_date,
-                    to_date: fy.year_end_date
-                });
-            });
+            // let fiscal_year = frappe.defaults.get_user_default("fiscal_year")
+            // console.log("FISCAL YEAR")
+            // frappe.model.with_doc("Fiscal Year", fiscal_year, function (r) {
+            // var fy = frappe.model.get_doc("Fiscal Year", fiscal_year);
+			frappe.query_report.set_filter_value({
+				from_date: frappe.datetime.year_start(),
+				to_date: frappe.datetime.year_end()
+			});
+            // });
         }
 };
