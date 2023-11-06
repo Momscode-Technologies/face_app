@@ -10,6 +10,7 @@ Before get-app
 
 source env/bin/activate
 
-pip install cmake
+pip install cmake 
+
 pip3 install qrcode
 
